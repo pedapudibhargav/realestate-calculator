@@ -1,0 +1,127 @@
+<form action="/action_page.php">
+    <h3>Income</h3>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="grossMonthlyRent">Total Gross Monthly Rent</label>
+            <input type="text" class="form-control" name="grossMonthlyRent" id="grossMonthlyRent" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="otherMontlyIncome">Other Monthly Income</label>
+            <input type="text" class="form-control" name="otherMontlyIncome" id="otherMontlyIncome" placeholder="00">
+        </div>
+    </div>
+
+
+    <h3>Fixed Landloard-Paid Expenses</h3>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="electricity">Electricity</label>
+            <input type="text" class="form-control" name="electricity" id="electricity" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="waterAndSewer">Water & Sewer</label>
+            <input type="text" class="form-control" name="waterAndSewer" id="waterAndSewer" placeholder="00">
+        </div>
+
+
+        <div class="form-group">
+            <label for="electricity">PMI</label>
+            <input type="text" class="form-control" name="pmi" id="pmi" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="waterAndSewer">Garbage</label>
+            <input type="text" class="form-control" name="grabage" id="grabage" placeholder="00">
+        </div>
+
+
+        <div class="form-group">
+            <label for="electricity">Lawn Maintainance per Month</label>
+            <input type="text" class="form-control" name="lawnExpensesPerMonth" id="lawnExpensesPerMonth"
+                placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="waterAndSewer">Snow Removal per Month</label>
+            <input type="text" class="form-control" name="snowRemovalPerMonth" id="snoRemovalPerMonth" placeholder="00">
+        </div>
+
+
+        <div class="form-group">
+            <label for="electricity">HOAs</label>
+            <input type="text" class="form-control" name="hoas" id="hoas" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="waterAndSewer">Montly Insurance</label>
+            <input type="text" class="form-control" name="montlyInsurance" id="montlyInsurance" placeholder="00">
+        </div>
+
+
+        <div class="form-group">
+            <label for="electricity">Property Taxes</label>
+            <input type="text" class="form-control" name="propertyTaxes" id="propertyTaxes" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="waterAndSewer">Other Montly Expenses</label>
+            <input type="text" class="form-control" name="otherMontlyExpenses" id="otherMontlyExpenses"
+                placeholder="00">
+        </div>
+    </div>
+
+
+    <h3>Variable Landloard-Paid Expenses</h3>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="grossMonthlyRent">Vacancy (%)</label>
+            <input type="text" class="form-control" name="vacancy" id="vacancy" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="otherMontlyIncome">Repairs and maintenance (%)</label>
+            <input type="text" class="form-control" name="repairsAndMaintenance" id="repairsAndMaintenance"
+                placeholder="00">
+        </div>
+
+        <div class="form-group">
+            <label for="grossMonthlyRent">Capital Expenditures (%)</label>
+            <input type="text" class="form-control" name="capitalExpenditure" id="capitalExpenditure" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="otherMontlyIncome">Management Fees (%)</label>
+            <input type="text" class="form-control" name="managementFees" id="managementFees"
+                placeholder="00">
+        </div>
+
+        <div class="form-group">
+            <label for="grossMonthlyRent">Vacancy (%)</label>
+            <input type="text" class="form-control" name="vacancy" id="vacancy" placeholder="0.00">
+        </div>
+    </div>
+
+
+
+    <h3>Future Assumptions</h3>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="grossMonthlyRent">Annual Income Growth (%)</label>
+            <input type="text" class="form-control" name="vacancy" id="vacancy" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="otherMontlyIncome">Annual PV Growth (%)</label>
+            <input type="text" class="form-control" name="repairsAndMaintenance" id="repairsAndMaintenance"
+                placeholder="00">
+        </div>
+
+        <div class="form-group">
+            <label for="grossMonthlyRent">Annual Expenses Growth (%)</label>
+            <input type="text" class="form-control" name="capitalExpenditure" id="capitalExpenditure" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="otherMontlyIncome">Sales Expenses (%)</label>
+            <input type="text" class="form-control" name="managementFees" id="managementFees"
+                placeholder="00">
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <button type="button" class="btn btn-secondary"><a routerLink="/calculators/brrrr/purchase-info">Previous Step </a></button>
+        <button type="button"  class="btn btn-primary">Calculate Results</button>
+    </div>
+</form>

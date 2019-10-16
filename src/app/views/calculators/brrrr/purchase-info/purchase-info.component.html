@@ -1,0 +1,198 @@
+<form action="/action_page.php">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="reportTitle">Purchase Price</label>
+            <input type="text" class="form-control" id="purchasePrice" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="reportAddress">After Repair Value</label>
+            <input type="text" class="form-control" id="afterRepairValue" placeholder="00">
+        </div>
+
+        <div class="form-group">
+            <label for="reportTitle">Purchase Closing Cost</label>
+            <input type="text" class="form-control" id="purchaseClosingCost" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label for="reportAddress">Estimated Repair Cost</label>
+            <input type="text" class="form-control" id="estimatedRepairCost" placeholder="00">
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <hr>
+        <h3>Purchase Loan Details</h3>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="cashPurchase">
+                    <label class="form-check-label" for="cashPurchase">
+                        Cash Purchase?
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="propertyCity">Down Payment of purchase price</label>
+                    <input type="text" class="form-control" id="downPaymentOfPurchasePrice" placeholder="5%">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="propertyCity">Loan Interest Rate (%)</label>
+                    <input type="text" class="form-control" id="loanInterestRate" placeholder="CA">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="propertyCity">Points charged by lender</label>
+                    <input type="text" class="form-control" id="pointsChargedByLender" placeholder="XXXXX">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="propertyCity">Other Charges from the lender</label>
+                    <input type="text" class="form-control" id="otherChargesFromTheLender" placeholder="XXXXX">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-check">
+                <label class="form-check-label">
+                    Loan Fees & Points
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="loanFeesAndPoints" id="exampleRadios2"
+                    value="intoLoan">
+                <label class="form-check-label">
+                    Second default radio
+                </label>
+            </div>
+            <div class="form-check ">
+                <input class="form-check-input" type="radio" name="loanFeesAndPoints" id="exampleRadios3"
+                    value="outOfPocket">
+                <label class="form-check-label" for="exampleRadios3">
+                    Pay loan fees/points out of pocket
+                </label>
+            </div>
+
+        </div>
+
+        <br>
+        <div class="col-sm-6">
+            <div class="form-check">
+                <label class="form-check-label">
+                    Interest Only?
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="loanFeesAndPoints" value="yes">
+                <label class="form-check-label">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check ">
+                <input class="form-check-input" type="radio" name="loanFeesAndPoints" value="no">
+                <label class="form-check-label" for="exampleRadios3">
+                    No
+                </label>
+            </div>
+        </div>
+
+
+
+
+        <br>
+        <div class="col-sm-6">
+            <div class="form-check">
+                <label class="form-check-label">
+                    Includes PMI?
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="includesPMI" value="yes">
+                <label class="form-check-label">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check ">
+                <input class="form-check-input" type="radio" name="includesPMI" value="no">
+                <label class="form-check-label" for="exampleRadios3">
+                    No
+                </label>
+            </div>
+        </div>
+
+
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Amortized Over How Many Years?</label>
+                <input type="text" class="form-control" id="amortizedYears" name="amortizedYears" placeholder="1-30">
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Refinance After How Many Months?</label>
+                <input type="text" class="form-control" id="numberOfMonthsToRefinance" name="numberOfMonthsToRefinance"
+                    placeholder="00">
+            </div>
+        </div>
+
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Estimated Rehab Time in Months?</label>
+                <input type="text" class="form-control" id="rehabTimeInMonths" name="rehabTimeInMonths"
+                    placeholder="00">
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <h3>Refinance Loan Details</h3>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Enter Loan Amount</label>
+                <input type="text" class="form-control" id="refiLoanAmount" name="refiLoanAmount" placeholder="00">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Loan Interest Rate (%)</label>
+                <input type="text" class="form-control" id="refiLoanInterestRate" name="refiLoanInterestRate" placeholder="00">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Other Refinance Closing Costs or lender fees</label>
+                <input type="text" class="form-control" id="refiClosingCost" name="refiClosingCost" placeholder="00">
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Amortized Over How Many Years?</label>
+                <input type="text" class="form-control" id="refiAmortizedYears" name="refiAmortizedYears" placeholder="00">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="reportTitle">Typical cap rate for your area (%)</label>
+                <input type="text" class="form-control" id="capRateInArea" name="capRateInArea" placeholder="00">
+            </div>
+        </div>
+    </div>
+</form>

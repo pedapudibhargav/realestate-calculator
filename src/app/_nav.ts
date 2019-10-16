@@ -41,6 +41,20 @@ export const navItems: NavData[] = [
   },
   {
     title: true,
+    name: 'Calculator'
+  },
+  {
+    name: 'Rehab Cost',
+    url: '/calculators/rehab-cost',
+    icon: 'icon-drop'
+  },
+  {
+    name: 'BRRRR',
+    url: '/calculators/brrrr',
+    icon: 'icon-pencil'
+  },
+  {
+    title: true,
     name: 'Theme'
   },
   {
