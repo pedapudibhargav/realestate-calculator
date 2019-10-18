@@ -25,7 +25,7 @@ export class BrrrrService {
 
 
   updatePurchaseInfo(purchaseInfo : any){
-    console.log("BRRRR - s - Purchase info", purchaseInfo);
+    
   }
 
 }

@@ -64,7 +64,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), FormsModule],
+  imports: [RouterModule.forChild(routes), FormsModule,CommonModule],
   exports: [RouterModule],
   declarations: [RehabCostComponent, BrrrrComponent, PropertyInfoComponent, PurchaseInfoComponent, RentalInfoComponent, ExteriorExpensesComponent]
 })

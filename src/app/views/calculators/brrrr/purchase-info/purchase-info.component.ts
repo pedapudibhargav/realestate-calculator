@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PropertiesService } from '../../../../services/properties/properties.service';
+import { BrrrrService } from '../../../../services/brrrr/brrrr.service';
 
 @Component({
   selector: 'app-purchase-info',
@@ -28,14 +30,26 @@ export class PurchaseInfoComponent implements OnInit {
 	otherRefiClosingCosts:string =  "123";
 	refiAomortizedDurationInYears:string =  "123";
   refiCaprate:string =  "12";
-  
-  constructor(private router : Router) { }
+  equity:number = +this.arv - (+this.prchasePrice + +this.purchaseClosingCost + +this.estimatedRepairCost);
+
+  currentProperty:any = {};
+
+  constructor(private router : Router, private propertiesService: PropertiesService, private brrrrService: BrrrrService) { }
 
   ngOnInit() {
+    var tmpProperty = this.propertiesService.getcurrentPropertyInUse();
+    if(tmpProperty && tmpProperty.purchaseInfo){
+      this.currentProperty = tmpProperty;
+      if(tmpProperty.purchaseInfo.prchasePrice){
+        this.fillTheForm(tmpProperty.purchaseInfo);
+      }
+    }
   }
 
   onClickSubmit(dataIn) {
-      console.log("Data from purchase Info:", JSON.stringify(dataIn));
+      // console.log("Data from purchase Info:", JSON.stringify(dataIn));     
+      this.currentProperty.purchaseInfo = dataIn;      
+      // console.log("Purchase Info Comp: prop info updated in db:", this.propertiesService.updateCurrentPropertyInUse(this.currentProperty));
       this.router.navigate(['/calculators/brrrr/rental-info']);
   }
 
