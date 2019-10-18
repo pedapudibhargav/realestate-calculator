@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BrrrrService } from '../../../../services/brrrr/brrrr.service';
 import { Router } from '@angular/router';
+import { PropertiesService } from '../../../../services/properties/properties.service';
 
 @Component({
   selector: 'app-property-info',
@@ -8,19 +9,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./property-info.component.scss']
 })
 export class PropertyInfoComponent implements OnInit {
-  propertyTitle:string = "9999999999999";
-  propertyAddress:string = "9999999999999";
-  propertyCity:string = "9999999999999";
-  propertyState:string = "9999999999999";
-  propertyZip:string = "9999999999999";
-  propertySalesDescription:string = "9999999999999";
+  propertyId:number = 0;
+  propertyTitle:string = "";
+  propertyAddress:string = "";
+  propertyCity:string = "";
+  propertyState:string = "";
+  propertyZip:string = "";
+  propertySalesDescription:string = "";
 
+  isNewProperty:boolean = true;
 
-  constructor(private brrrrService: BrrrrService, private router : Router) {    
-    
+  constructor(private brrrrService: BrrrrService, private router : Router, private propertyService: PropertiesService) {    
+    var tmpCurrPropertyInUse = this.propertyService.getcurrentPropertyInUse();
+    if(tmpCurrPropertyInUse){
+      console.log("Property Info Component: currentPropertyInUse:", tmpCurrPropertyInUse);
+      this.isNewProperty = false;
+      this.updateFormValues(tmpCurrPropertyInUse.propertyInfo);      
+    }  
+    else{
+      this.propertyId  =  +this.propertyService.createNewProperty().propertyInfo.propertyId;
+    }
    }
 
   ngOnInit() {
+    
+  }
+
+  ngAfterViewInit(){ 
   }
 
   onClickSubmit(dataIn) {
@@ -29,7 +44,8 @@ export class PropertyInfoComponent implements OnInit {
       this.router.navigate(['/calculators/brrrr/purchase-info']);
   }
 
-  updateFormValues(dataIn){
+  updateFormValues(dataIn){        
+    this.propertyId = dataIn.propertyId;
     this.propertyTitle = dataIn.propertyTitle;
     this.propertyAddress = dataIn.propertyAddress;
     this.propertyCity = dataIn.propertyCity;

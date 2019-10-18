@@ -7,6 +7,7 @@ import { PropertyInfoComponent } from './brrrr/property-info/property-info.compo
 import { PurchaseInfoComponent } from './brrrr/purchase-info/purchase-info.component';
 import { RentalInfoComponent } from './brrrr/rental-info/rental-info.component';
 import { FormsModule, NgModel } from '@angular/forms';
+import { ExteriorExpensesComponent } from './rehab-cost/exterior-expenses/exterior-expenses.component';
 
 
 
@@ -65,6 +66,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes), FormsModule],
   exports: [RouterModule],
-  declarations: [RehabCostComponent, BrrrrComponent, PropertyInfoComponent, PurchaseInfoComponent, RentalInfoComponent]
+  declarations: [RehabCostComponent, BrrrrComponent, PropertyInfoComponent, PurchaseInfoComponent, RentalInfoComponent, ExteriorExpensesComponent]
 })
 export class CalculatorsModule { }
