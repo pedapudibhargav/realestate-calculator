@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rehab-cost.component.scss']
 })
 export class RehabCostComponent implements OnInit {
-
+  activeTab = "";
   constructor() { }
 
   ngOnInit() {
+    this.activeTab = "home";
   }
 
+  tabsControler(){
+    console.log("This is working");
+  }
 }

@@ -1,21 +1,21 @@
-<form action="/action_page.php">
+<form #purchaseInfo ="ngForm" (ngSubmit) = "onClickSubmit(purchaseInfo.value)">    
     <div class="col-sm-6">
         <div class="form-group">
-            <label for="reportTitle">Purchase Price</label>
-            <input type="text" class="form-control" id="purchasePrice" placeholder="0.00">
+            <label for="prchasePrice">Purchase Price</label>
+            <input [(ngModel)]="prchasePrice" value="" name="prchasePrice" type="text" class="form-control" placeholder="0.00">
         </div>
         <div class="form-group">
-            <label for="reportAddress">After Repair Value</label>
-            <input type="text" class="form-control" id="afterRepairValue" placeholder="00">
+            <label for="arv">After Repair Value</label>
+            <input [(ngModel)]="arv" value="" name="arv" type="text" class="form-control" placeholder="00">
         </div>
 
         <div class="form-group">
-            <label for="reportTitle">Purchase Closing Cost</label>
-            <input type="text" class="form-control" id="purchaseClosingCost" placeholder="0.00">
+            <label for="purchaseClosingCost">Purchase Closing Cost</label>
+            <input [(ngModel)]="purchaseClosingCost" value="" name="purchaseClosingCost" type="text" class="form-control" placeholder="0.00">
         </div>
         <div class="form-group">
-            <label for="reportAddress">Estimated Repair Cost</label>
-            <input type="text" class="form-control" id="estimatedRepairCost" placeholder="00">
+            <label for="estimatedRepairCost">Estimated Repair Cost</label>
+            <input [(ngModel)]="estimatedRepairCost" value="" name="estimatedRepairCost" type="text" class="form-control" placeholder="00">
         </div>
     </div>
     <div class="col-sm-6">
@@ -24,58 +24,56 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="cashPurchase">
-                    <label class="form-check-label" for="cashPurchase">
+                    <input [(ngModel)]="cashPurchaseBool" value="" name="cashPurchaseBool" class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label" for="cashPurchaseBool">
                         Cash Purchase?
                     </label>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="propertyCity">Down Payment of purchase price</label>
-                    <input type="text" class="form-control" id="downPaymentOfPurchasePrice" placeholder="5%">
+                    <label for="downPaymentOfPurchasePrice">Down Payment of purchase price</label>
+                    <input [(ngModel)]="downPaymentOfPurchasePrice" value="" name="downPaymentOfPurchasePrice" type="text" class="form-control" placeholder="00">
                 </div>
             </div>
 
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="propertyCity">Loan Interest Rate (%)</label>
-                    <input type="text" class="form-control" id="loanInterestRate" placeholder="CA">
+                    <label for="loanInterestRatePercentage">Loan Interest Rate (%)</label>
+                    <input [(ngModel)]="loanInterestRatePercentage" value="" name="loanInterestRatePercentage" type="text" class="form-control" placeholder="">
                 </div>
             </div>
 
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="propertyCity">Points charged by lender</label>
-                    <input type="text" class="form-control" id="pointsChargedByLender" placeholder="XXXXX">
+                    <label for="pointsChargedByLender">Points charged by lender</label>
+                    <input [(ngModel)]="pointsChargedByLender" value="" name="pointsChargedByLender" type="text" class="form-control" placeholder="0-10">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="propertyCity">Other Charges from the lender</label>
-                    <input type="text" class="form-control" id="otherChargesFromTheLender" placeholder="XXXXX">
+                    <label for="otherChargesFromTheLender">Other Charges from the lender</label>
+                    <input [(ngModel)]="otherChargesFromTheLender" value="" name="otherChargesFromTheLender" type="text" class="form-control" placeholder="00">
                 </div>
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="form-check">
-                <label class="form-check-label">
+                <label class="loanFeesAndPoints">
                     Loan Fees & Points
                 </label>
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="loanFeesAndPoints" id="exampleRadios2"
-                    value="intoLoan">
-                <label class="form-check-label">
-                    Second default radio
+                <input [(ngModel)]="loanFeesAndPoints" name="loanFeesAndPoints" class="form-check-input" type="radio" value="intoLoan">
+                <label class="wrapLoanFeesIntoLoan">
+                    Wrap loan fees/points into the loan
                 </label>
             </div>
             <div class="form-check ">
-                <input class="form-check-input" type="radio" name="loanFeesAndPoints" id="exampleRadios3"
-                    value="outOfPocket">
-                <label class="form-check-label" for="exampleRadios3">
+                <input [(ngModel)]="loanFeesAndPoints" name="loanFeesAndPoints" class="form-check-input" type="radio"  value="outOfPocket">
+                <label class="form-check-label" for="loanFeesAndPoints">
                     Pay loan fees/points out of pocket
                 </label>
             </div>
@@ -91,14 +89,14 @@
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="loanFeesAndPoints" value="yes">
+                <input [(ngModel)]="interestOnly" class="form-check-input" type="radio" name="interestOnly" value="yes">
                 <label class="form-check-label">
                     Yes
                 </label>
             </div>
             <div class="form-check ">
-                <input class="form-check-input" type="radio" name="loanFeesAndPoints" value="no">
-                <label class="form-check-label" for="exampleRadios3">
+                <input [(ngModel)]="interestOnly" class="form-check-input" type="radio" name="interestOnly" value="no">
+                <label class="form-check-label" for="interestOnly">
                     No
                 </label>
             </div>
@@ -116,13 +114,13 @@
             </div>
 
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="includesPMI" value="yes">
+                <input [(ngModel)]="includesPMI" class="form-check-input" type="radio" name="includesPMI" value="yes">
                 <label class="form-check-label">
                     Yes
                 </label>
             </div>
             <div class="form-check ">
-                <input class="form-check-input" type="radio" name="includesPMI" value="no">
+                <input [(ngModel)]="includesPMI" class="form-check-input" type="radio" name="includesPMI" value="no">
                 <label class="form-check-label" for="exampleRadios3">
                     No
                 </label>
@@ -134,15 +132,14 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="reportTitle">Amortized Over How Many Years?</label>
-                <input type="text" class="form-control" id="amortizedYears" name="amortizedYears" placeholder="1-30">
+                <input [(ngModel)]="amortizedOverYearsCount" type="text" class="form-control" name="amortizedOverYearsCount" placeholder="1-30">
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="reportTitle">Refinance After How Many Months?</label>
-                <input type="text" class="form-control" id="numberOfMonthsToRefinance" name="numberOfMonthsToRefinance"
-                    placeholder="00">
+                <label for="monthsBeforeRefinance">Refinance After How Many Months?</label>
+                <input [(ngModel)]="monthsBeforeRefinance" type="text" class="form-control" name="monthsBeforeRefinance" placeholder="00">
             </div>
         </div>
 
@@ -150,8 +147,7 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="reportTitle">Estimated Rehab Time in Months?</label>
-                <input type="text" class="form-control" id="rehabTimeInMonths" name="rehabTimeInMonths"
-                    placeholder="00">
+                <input [(ngModel)]="rehabTimeInMonths" type="text" class="form-control" name="rehabTimeInMonths" placeholder="00">
             </div>
         </div>
         <br>
@@ -161,20 +157,20 @@
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="reportTitle">Enter Loan Amount</label>
-                <input type="text" class="form-control" id="refiLoanAmount" name="refiLoanAmount" placeholder="00">
+                <label for="loanAmount">Enter Loan Amount</label>
+                <input [(ngModel)]="loanAmount" type="text" class="form-control" name="loanAmount" placeholder="00">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="reportTitle">Loan Interest Rate (%)</label>
-                <input type="text" class="form-control" id="refiLoanInterestRate" name="refiLoanInterestRate" placeholder="00">
+                <label for="loanInterestRate">Loan Interest Rate (%)</label>
+                <input [(ngModel)]="loanInterestRate" type="text" class="form-control" name="loanInterestRate" placeholder="00">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="reportTitle">Other Refinance Closing Costs or lender fees</label>
-                <input type="text" class="form-control" id="refiClosingCost" name="refiClosingCost" placeholder="00">
+                <label for="otherRefiClosingCosts">Other Refinance Closing Costs or lender fees</label>
+                <input [(ngModel)]="otherRefiClosingCosts" type="text" class="form-control" name="otherRefiClosingCosts" placeholder="00">
             </div>
         </div>
 
@@ -184,14 +180,14 @@
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="reportTitle">Amortized Over How Many Years?</label>
-                <input type="text" class="form-control" id="refiAmortizedYears" name="refiAmortizedYears" placeholder="00">
+                <label for="refiAomortizedDurationInYears">Amortized Over How Many Years?</label>
+                <input [(ngModel)]="refiAomortizedDurationInYears" type="text" class="form-control" name="refiAomortizedDurationInYears" placeholder="00">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="reportTitle">Typical cap rate for your area (%)</label>
-                <input type="text" class="form-control" id="capRateInArea" name="capRateInArea" placeholder="00">
+                <label for="refiCaprate">Typical cap rate for your area (%)</label>
+                <input [(ngModel)]="refiCaprate" type="text" class="form-control" name="refiCaprate" placeholder="00">
             </div>
         </div>
     </div>
@@ -201,7 +197,9 @@
             <a routerLink="/calculators/brrrr/property-info"><button type="button" class="btn btn-secondary">Previous Step </button></a>
         </div>
         <div class="col-sm-3 text-right">
-            <a routerLink="/calculators/brrrr/rental-info"><button type="button" class="btn btn-secondary">Next Step </button></a>
+            <!-- <a routerLink="/calculators/brrrr/rental-info" > -->
+                <button type="submit" class="btn btn-secondary">Next Step </button>
+            <!-- </a> -->
         </div>
     </div>
 </form>

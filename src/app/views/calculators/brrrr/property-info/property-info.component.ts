@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BrrrrService } from '../../../../services/brrrr/brrrr.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-info',
@@ -15,7 +16,7 @@ export class PropertyInfoComponent implements OnInit {
   propertySalesDescription:string = "9999999999999";
 
 
-  constructor(private brrrrService: BrrrrService) {    
+  constructor(private brrrrService: BrrrrService, private router : Router) {    
     
    }
 
@@ -23,9 +24,9 @@ export class PropertyInfoComponent implements OnInit {
   }
 
   onClickSubmit(dataIn) {
-      alert("This is the data being stored: ");
       console.log("Data in:", JSON.stringify(dataIn));
       this.brrrrService.updatePropertyDetails(dataIn);
+      this.router.navigate(['/calculators/brrrr/purchase-info']);
   }
 
   updateFormValues(dataIn){
