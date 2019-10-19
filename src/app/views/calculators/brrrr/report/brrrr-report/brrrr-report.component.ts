@@ -39,6 +39,7 @@ export class BrrrrReportComponent implements OnInit {
   }
   constructor(private propertiesService: PropertiesService, private brrrrService: BrrrrService) {
     this.currentProperty = this.propertiesService.getcurrentPropertyInUse();
+    console.log("Current Property:", this.currentProperty);
     this.computeAnalysis();
   }
 
@@ -57,7 +58,7 @@ export class BrrrrReportComponent implements OnInit {
     this.currentPropertyReport.refinancePeriod.payments = +purchaseInfo.refiAomortizedDurationInYears * 12;
     var x = Math.pow(1 + this.currentPropertyReport.refinancePeriod.interest, this.currentPropertyReport.refinancePeriod.payments);
     this.currentPropertyReport.refinancePeriod.monthlyPayment = (this.currentPropertyReport.refinancePeriod.principal * x * this.currentPropertyReport.refinancePeriod.interest) / (x - 1);
-    console.log("Monthly Payment:" + this.currentPropertyReport.refinancePeriod.monthlyPayment);
+    // console.log("Monthly Payment:" + this.currentPropertyReport.refinancePeriod.monthlyPayment);
     for (var i = 0; i < rentalInfoKeys.length; i++) {
       if (rentalInfoKeys[i] != "grossMonthlyRent" && rentalInfoKeys[i] != "otherMontlyIncome") {
         expenses = expenses + +rentalInfo[rentalInfoKeys[i]];

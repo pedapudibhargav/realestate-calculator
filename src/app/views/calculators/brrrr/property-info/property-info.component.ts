@@ -22,7 +22,7 @@ export class PropertyInfoComponent implements OnInit {
   constructor(private brrrrService: BrrrrService, private router : Router, private propertyService: PropertiesService) {    
     var tmpCurrPropertyInUse = this.propertyService.getcurrentPropertyInUse();
     if(tmpCurrPropertyInUse){
-      console.log("Property Info Component: currentPropertyInUse:", tmpCurrPropertyInUse);
+      // console.log("Property Info Component: currentPropertyInUse:", tmpCurrPropertyInUse);
       this.isNewProperty = false;
       this.updateFormValues(tmpCurrPropertyInUse.propertyInfo);      
     }  
@@ -39,7 +39,7 @@ export class PropertyInfoComponent implements OnInit {
   }
 
   onClickSubmit(dataIn) {
-      console.log("Data in:", JSON.stringify(dataIn));
+      // console.log("Data in:", JSON.stringify(dataIn));
       this.brrrrService.updatePropertyDetails(dataIn);
       this.router.navigate(['/calculators/brrrr/purchase-info']);
   }

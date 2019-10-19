@@ -36,7 +36,10 @@
                         <td>After Repair Value</td>
                         <th scope="row">{{currentProperty.purchaseInfo.arv | currency}}</th>
                     </tr>
-
+                    <tr>
+                    <td>Equity Remaining</td>
+                        <th scope="row"  [ngClass]="{'text-success': currentProperty.purchaseInfo.equityRemaining > 0, 'text-danger':currentProperty.purchaseInfo.equityRemaining< 1 }">{{currentProperty.purchaseInfo.equityRemaining | currency}}</th>
+                    </tr>
                 </tbody>
             </table>
 

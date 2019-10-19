@@ -50,10 +50,9 @@ export class PurchaseInfoComponent implements OnInit {
   onClickSubmit(dataIn) {
       // console.log("Data from purchase Info:", JSON.stringify(dataIn));     
       this.currentProperty.purchaseInfo = dataIn;   
-
-      this.currentProperty.purchaseInfo.totalProjectCost = this.totalProjectCost;
-         
-      // console.log("Purchase Info Comp: prop info updated in db:", this.propertiesService.updateCurrentPropertyInUse(this.currentProperty));
+      this.currentProperty.purchaseInfo.totalProjectCost = +this.prchasePrice + +this.purchaseClosingCost + +this.estimatedRepairCost;
+      this.currentProperty.purchaseInfo.equityRemaining = +this.arv - this.currentProperty.purchaseInfo.totalProjectCost;
+      console.log("Purchase Info Comp: prop info updated in db:", this.propertiesService.updateCurrentPropertyInUse(this.currentProperty));
       this.router.navigate(['/calculators/brrrr/rental-info']);
   }
 
@@ -77,7 +76,7 @@ export class PurchaseInfoComponent implements OnInit {
     this.loanInterestRate =  dataIn.loanInterestRate;
     this.otherRefiClosingCosts =  dataIn.otherRefiClosingCosts;
     this.refiAomortizedDurationInYears =  dataIn.refiAomortizedDurationInYears;
-    this.totalProjectCost = dataIn.totalProjectCost;
+    this.totalProjectCost = dataIn.totalProjectCost
     this.refiCaprate =  dataIn.refiCaprate;
   }
 
