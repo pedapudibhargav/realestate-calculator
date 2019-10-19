@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PropertiesService } from '../../../../services/properties/properties.service';
+import { BrrrrService } from '../../../../services/brrrr/brrrr.service';
 
 @Component({
 	selector: 'app-rental-info',
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RentalInfoComponent implements OnInit {
 
-	constructor(private router: Router) { }
+	constructor(private router: Router, private propertiesService:PropertiesService, private brrrrService : BrrrrService) { }
 
 	grossMonthlyRent: string = "123";
 	otherMontlyIncome: string = "123";
@@ -31,13 +33,27 @@ export class RentalInfoComponent implements OnInit {
 	annualExpenseGrowth: string = "123";
 	salesExpensesPercentage: string = "123";
 
+	currentProperty:any = {};
+
+
 	ngOnInit() {
+		var tmpProperty = this.propertiesService.getcurrentPropertyInUse();
+		if(tmpProperty && tmpProperty.rentalInfo){
+		  this.currentProperty = tmpProperty;
+		  console.log("a", tmpProperty.rentalInfo);
+		  if(tmpProperty.rentalInfo.grossMonthlyRent){
+			console.log("b");
+			this.fillInTheForm(tmpProperty.rentalInfo);
+		  }
+		}
 	}
 
 
 	onClickSubmit(dataIn) {
 		console.log("Data from Rental Info:", JSON.stringify(dataIn));
-		// this.router.navigate(['/calculators/brrrr/rental-info']);
+		this.currentProperty.rentalInfo = dataIn;      
+		console.log("Purchase Info Comp: prop info updated in db:", this.propertiesService.updateCurrentPropertyInUse(this.currentProperty));
+		this.router.navigate(['/calculators/brrrr/report']);
 	}
 
 	fillInTheForm(dataIn) {

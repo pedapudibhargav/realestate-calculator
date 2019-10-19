@@ -1,0 +1,198 @@
+<div class="container brrr-report-container">
+    <div class="row">
+        <div class="col-12">
+            <h4>{{currentProperty.propertyInfo.propertyTitle}}</h4>
+            <a routerLink="/calculators/brrrr/rental-info">
+                <button type="button" class="btn btn-primary">Edit Report</button>
+            </a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-5">
+            <div class="col-12 highlights-col">
+                <h3>
+                    {{currentProperty.purchaseInfo.prchasePrice | currency}}
+                </h3>
+                <h3>
+                    <small class="text-muted">Purchase Price</small>
+                </h3>
+            </div>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Purchase Closing Costs</td>
+                        <th scope="row">{{currentProperty.purchaseInfo.purchaseClosingCost | currency}}</th>
+                    </tr>
+                    <tr>
+                        <td>Estimated Repairs</td>
+                        <th scope="row">{{currentProperty.purchaseInfo.estimatedRepairCost | currency}}</th>
+                    </tr>
+                    <tr>
+                        <td>Total Project Cost</td>
+                        <th scope="row">{{currentProperty.purchaseInfo.totalProjectCost | currency}}</th>
+                    </tr>
+                    <tr>
+                        <td>After Repair Value</td>
+                        <th scope="row">{{currentProperty.purchaseInfo.arv | currency}}</th>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <hr>
+            <h4>Acquistion</h4>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Down Payment</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Loan Amount</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Loan Points/Fees</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Amortized Over</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Loan Interest Rate</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Monthly P&I</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Total Cash Needed At Purchase</td>
+                        <th scope="row">1</th>
+                    </tr>
+
+                </tbody>
+            </table>
+
+
+            <hr>
+            <h4>Refinance</h4>
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <td>Loan Amount</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Loan Fees</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Amortized Over</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Loan Interest Rate</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Monthly P&I</td>
+                        <th scope="row">1</th>
+                    </tr>
+                    <tr>
+                        <td>Total Cash Invested</td>
+                        <th scope="row">1</th>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-7">
+            <div class="row text-center">
+                <div class="btn-group btn-group-toggle" id="hightLevelViewButtons" data-toggle="buttons">
+                    <label class="btn btn-outline-primary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Rehab Period
+                    </label>
+                    <label class="btn btn-outline-primary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Initial Rental Period
+                    </label>
+                    <label class="btn btn-outline-primary">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Refinance
+                    </label>
+                </div>
+            </div>
+
+            <div class="row highlights-row">
+                <div class="col-3 highlights-col">
+                    <h3>
+                        {{currentProperty.rentalInfo.grossMonthlyRent | currency}}
+                    </h3>
+                    <h3>
+                        <small class="text-muted">Monthly Income</small>
+                    </h3>
+                </div>
+                <div class="col-3 highlights-col">
+                    <h3>
+                        {{currentPropertyReport.refinancePeriod.expenses | currency}}
+                    </h3>
+                    <h3>
+                        <small class="text-muted">Monthly Expenses</small>
+                    </h3>
+                </div>
+                <div class="col-3 highlights-col">
+                    <h3
+                        [ngClass]="{'text-success': currentPropertyReport.refinancePeriod.montlyCashflow > 0, 'text-danger':currentPropertyReport.refinancePeriod.montlyCashflow < 1 }">
+                        {{currentPropertyReport.refinancePeriod.montlyCashflow | currency}}
+                    </h3>
+                    <h3>
+                        <small class="text-muted">Monthly Cashflow</small>
+                    </h3>
+                </div>
+                <div class="col-3 highlights-col">
+                    <h3>
+                        --.--%
+                    </h3>
+                    <h3>
+                        <small class="text-muted">PRO Forma Cap Rate</small>
+                    </h3>
+                </div>
+            </div>
+            <div class="row highlights-row">
+                <div class="col-3 highlights-col">
+                    <h3>
+                        $--.--
+                    </h3>
+                    <h3>
+                        <small class="text-muted">NOI</small>
+                    </h3>
+                </div>
+                <div class="col-3 highlights-col">
+                    <h3>
+                        4 Months
+                    </h3>
+                    <h3>
+                        <small class="text-muted">Time to Refinance</small>
+                    </h3>
+                </div>
+                <div class="col-3 highlights-col">
+                    <h3>
+                        --.--%
+                    </h3>
+                    <h3>
+                        <small class="text-muted">Cash on Cash ROI</small>
+                    </h3>
+                </div>
+                <div class="col-3 highlights-col">
+                    <h3>
+                        --.--%
+                    </h3>
+                    <h3>
+                        <small class="text-muted">Purchase Cap Rate</small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

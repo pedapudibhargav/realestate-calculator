@@ -1,0 +1,27 @@
+.brrr-report-container{
+    margin-top:20px;
+}
+
+.highlights-col{
+    h3{
+        margin-bottom: 0;
+        &+h3{
+            margin-bottom: 8px;
+            small{
+                font-size: 60%;
+            }
+        }
+    }
+}
+
+.highlights-row{
+    margin-bottom: 20px;
+    &+.highlights-row{
+        margin-bottom: 0px;
+    }
+}
+
+#hightLevelViewButtons{
+    margin: 0 auto 20px auto;
+
+}

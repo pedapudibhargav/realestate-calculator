@@ -14,7 +14,7 @@ export class PurchaseInfoComponent implements OnInit {
 	arv:string =  "123";
 	purchaseClosingCost:string =  "123";
 	estimatedRepairCost:string =  "123";
-	cashPurchaseBool:any =  true;
+	cashPurchaseBool:any =  false;
 	downPaymentOfPurchasePrice:string =  "123";
 	loanInterestRatePercentage:string =  "123";
 	pointsChargedByLender:string =  "123";
@@ -30,7 +30,8 @@ export class PurchaseInfoComponent implements OnInit {
 	otherRefiClosingCosts:string =  "123";
 	refiAomortizedDurationInYears:string =  "123";
   refiCaprate:string =  "12";
-  equity:number = +this.arv - (+this.prchasePrice + +this.purchaseClosingCost + +this.estimatedRepairCost);
+  totalProjectCost:number = +this.prchasePrice + +this.purchaseClosingCost + +this.estimatedRepairCost;
+  equity:number = +this.arv - this.totalProjectCost;
 
   currentProperty:any = {};
 
@@ -48,7 +49,10 @@ export class PurchaseInfoComponent implements OnInit {
 
   onClickSubmit(dataIn) {
       // console.log("Data from purchase Info:", JSON.stringify(dataIn));     
-      this.currentProperty.purchaseInfo = dataIn;      
+      this.currentProperty.purchaseInfo = dataIn;   
+
+      this.currentProperty.purchaseInfo.totalProjectCost = this.totalProjectCost;
+         
       // console.log("Purchase Info Comp: prop info updated in db:", this.propertiesService.updateCurrentPropertyInUse(this.currentProperty));
       this.router.navigate(['/calculators/brrrr/rental-info']);
   }
@@ -73,6 +77,7 @@ export class PurchaseInfoComponent implements OnInit {
     this.loanInterestRate =  dataIn.loanInterestRate;
     this.otherRefiClosingCosts =  dataIn.otherRefiClosingCosts;
     this.refiAomortizedDurationInYears =  dataIn.refiAomortizedDurationInYears;
+    this.totalProjectCost = dataIn.totalProjectCost;
     this.refiCaprate =  dataIn.refiCaprate;
   }
 
