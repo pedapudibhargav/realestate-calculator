@@ -22,6 +22,10 @@
                 <tbody>
                     <tr>
                         <td>Purchase Closing Costs</td>
+                        <th scope="row">{{currentProperty.purchaseInfo.prchasePrice | currency}}</th>
+                    </tr>
+                    <tr>
+                        <td>Purchase Closing Costs</td>
                         <th scope="row">{{currentProperty.purchaseInfo.purchaseClosingCost | currency}}</th>
                     </tr>
                     <tr>
@@ -37,8 +41,10 @@
                         <th scope="row">{{currentProperty.purchaseInfo.arv | currency}}</th>
                     </tr>
                     <tr>
-                    <td>Equity Remaining</td>
-                        <th scope="row"  [ngClass]="{'text-success': currentProperty.purchaseInfo.equityRemaining > 0, 'text-danger':currentProperty.purchaseInfo.equityRemaining< 1 }">{{currentProperty.purchaseInfo.equityRemaining | currency}}</th>
+                        <td>Equity Remaining</td>
+                        <th scope="row"
+                            [ngClass]="{'text-success': currentProperty.purchaseInfo.equityRemaining > 0, 'text-danger':currentProperty.purchaseInfo.equityRemaining< 1 }">
+                            {{currentProperty.purchaseInfo.equityRemaining | currency}}</th>
                     </tr>
                 </tbody>
             </table>
@@ -48,33 +54,34 @@
             <table class="table table-borderless">
                 <tbody>
                     <tr>
+                        <td>Total Cash Needed At Purchase</td>
+                        <th scope="row">{{currentProperty.purchaseInfo.cashRequiredAtPurchase | currency}}</th>
+                    </tr>
+                    <tr>
                         <td>Down Payment</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.downPaymentOfPurchasePrice | currency}}</th>
                     </tr>
                     <tr>
                         <td>Loan Amount</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.totalMoneyBorrowed | currency}}</th>
                     </tr>
                     <tr>
                         <td>Loan Points/Fees</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.pointsChargedByLender}}</th>
                     </tr>
                     <tr>
                         <td>Amortized Over</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.amortizedOverMonthsCount}} Months</th>
                     </tr>
                     <tr>
                         <td>Loan Interest Rate</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.loanInterestRatePercentage}}%</th>
                     </tr>
                     <tr>
                         <td>Monthly P&I</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.purchaseLoanMonthlyPayment}}</th>
                     </tr>
-                    <tr>
-                        <td>Total Cash Needed At Purchase</td>
-                        <th scope="row">1</th>
-                    </tr>
+
 
                 </tbody>
             </table>
@@ -86,27 +93,27 @@
                 <tbody>
                     <tr>
                         <td>Loan Amount</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.refiLoanAmount | currency}}</th>
                     </tr>
                     <tr>
                         <td>Loan Fees</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.otherRefiClosingCosts | currency}}</th>
                     </tr>
                     <tr>
                         <td>Amortized Over</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.refiAomortizedDurationInYears}} years</th>
                     </tr>
                     <tr>
                         <td>Loan Interest Rate</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.refiLoanInterestRate}}%</th>
                     </tr>
                     <tr>
                         <td>Monthly P&I</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.refiMonthylyPayment | currency}}</th>
                     </tr>
                     <tr>
                         <td>Total Cash Invested</td>
-                        <th scope="row">1</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.finalTotalMoneyInvested | currency}}</th>
                     </tr>
 
                 </tbody>

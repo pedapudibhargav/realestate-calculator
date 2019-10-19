@@ -22,11 +22,11 @@ export class PurchaseInfoComponent implements OnInit {
 	loanFeesAndPoints:string =  "outOfPocket";
 	interestOnly:string =  "no";
 	includesPMI:string =  "yes";
-	amortizedOverYearsCount:string =  "12";
+	amortizedOverMonthsCount:string =  "12";
 	monthsBeforeRefinance:string =  "1";
 	rehabTimeInMonths:string =  "3";
-	loanAmount:string =  "123";
-	loanInterestRate:string =  "123";
+	refiLoanAmount:string =  "123";
+	refiLoanInterestRate:string =  "123";
 	otherRefiClosingCosts:string =  "123";
 	refiAomortizedDurationInYears:string =  "123";
   refiCaprate:string =  "12";
@@ -47,12 +47,66 @@ export class PurchaseInfoComponent implements OnInit {
     }
   }
 
+  convertPointsToCash(moneyRequired, points){
+    return (moneyRequired/100) * +points;
+  }
+
+  getInterestPayment(princ, intr){
+    return (((princ/100) * intr)/12).toFixed(2);
+  }
+
+  getMonthlyPayment(princ, intr, term){
+    intr = intr/1200;
+    term = term *12
+    var payment = +princ*(+intr * Math.pow((1 + +intr), +term))/(Math.pow((1 + +intr), +term) - 1);
+    console.log("Montly Payment:" + payment);
+	  return payment.toFixed(2);
+  }
+
   onClickSubmit(dataIn) {
       // console.log("Data from purchase Info:", JSON.stringify(dataIn));     
-      this.currentProperty.purchaseInfo = dataIn;   
+
+
+      /* -------------- START - Hard Money Caluclations  -------------- */
+      this.currentProperty.purchaseInfo = dataIn;  
+      var tempPurchaseInfo =  this.currentProperty.purchaseInfo;
+
       this.currentProperty.purchaseInfo.totalProjectCost = +this.prchasePrice + +this.purchaseClosingCost + +this.estimatedRepairCost;
       this.currentProperty.purchaseInfo.equityRemaining = +this.arv - this.currentProperty.purchaseInfo.totalProjectCost;
-      console.log("Purchase Info Comp: prop info updated in db:", this.propertiesService.updateCurrentPropertyInUse(this.currentProperty));
+
+      this.currentProperty.purchaseInfo.cashRequiredAtPurchase = +tempPurchaseInfo.totalProjectCost;
+
+      var totalMoneyBorrowed = this.currentProperty.purchaseInfo.cashRequiredAtPurchase - +tempPurchaseInfo.downPaymentOfPurchasePrice;
+      var totalMoneyOutOfPocket = +tempPurchaseInfo.downPaymentOfPurchasePrice;
+
+      if(tempPurchaseInfo.loanFeesAndPoints == "outOfPocket"){
+        totalMoneyOutOfPocket = totalMoneyOutOfPocket + +tempPurchaseInfo.otherChargesFromTheLender + this.convertPointsToCash(totalMoneyBorrowed, tempPurchaseInfo.pointsChargedByLender);
+      }
+      else{
+        totalMoneyBorrowed = totalMoneyBorrowed + +this.currentProperty.purchaseInfo.otherChargesFromTheLender + this.convertPointsToCash(totalMoneyBorrowed, tempPurchaseInfo.pointsChargedByLender);
+      }
+
+      this.currentProperty.purchaseInfo.totalMoneyBorrowed = totalMoneyBorrowed;
+      this.currentProperty.purchaseInfo.totalMoneyOutOfPocket = totalMoneyOutOfPocket;
+      this.currentProperty.purchaseInfo.purchaseLoanMonthlyPayment = this.getInterestPayment(totalMoneyBorrowed, +tempPurchaseInfo.loanInterestRatePercentage);
+      /* -------------- END - Hard Money Caluclations  -------------- */
+
+
+
+      /* -------------- START - Refi Caluclations  -------------- */
+      var refiLoanAmount = +tempPurchaseInfo.refiLoanAmount;
+      var refiMonthylyPayment = this.getMonthlyPayment(refiLoanAmount, +tempPurchaseInfo.refiLoanInterestRate, +tempPurchaseInfo.refiAomortizedDurationInYears);
+      var refiTotalMoneyOutOfPockt = totalMoneyOutOfPocket + +tempPurchaseInfo.otherRefiClosingCosts;
+      var finalTotalMoneyInvested = (totalMoneyBorrowed + refiTotalMoneyOutOfPockt) - refiLoanAmount;
+
+      this.currentProperty.purchaseInfo.refiMonthylyPayment = refiMonthylyPayment;
+      this.currentProperty.purchaseInfo.refiTotalMoneyOutOfPockt = refiTotalMoneyOutOfPockt;
+      this.currentProperty.purchaseInfo.finalTotalMoneyInvested = finalTotalMoneyInvested;
+      
+
+      /* -------------- END - Refi Caluclations  -------------- */
+      let objAfterSaved = this.propertiesService.updateCurrentPropertyInUse(this.currentProperty);
+      // console.log("Purchase Info Comp: prop info updated in db:",objAfterSaved);
       this.router.navigate(['/calculators/brrrr/rental-info']);
   }
 
@@ -69,11 +123,11 @@ export class PurchaseInfoComponent implements OnInit {
     this.loanFeesAndPoints =  dataIn.loanFeesAndPoints;
     this.interestOnly =  dataIn.interestOnly;
     this.includesPMI =  dataIn.includesPMI;
-    this.amortizedOverYearsCount =  dataIn.amortizedOverYearsCount;
+    this.amortizedOverMonthsCount =  dataIn.amortizedOverMonthsCount;
     this.monthsBeforeRefinance =  dataIn.monthsBeforeRefinance;
     this.rehabTimeInMonths =  dataIn.rehabTimeInMonths;
-    this.loanAmount =  dataIn.loanAmount;
-    this.loanInterestRate =  dataIn.loanInterestRate;
+    this.refiLoanAmount =  dataIn.refiLoanAmount;
+    this.refiLoanInterestRate =  dataIn.refiLoanInterestRate;
     this.otherRefiClosingCosts =  dataIn.otherRefiClosingCosts;
     this.refiAomortizedDurationInYears =  dataIn.refiAomortizedDurationInYears;
     this.totalProjectCost = dataIn.totalProjectCost
