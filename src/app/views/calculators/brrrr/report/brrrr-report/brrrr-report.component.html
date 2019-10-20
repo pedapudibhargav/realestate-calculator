@@ -42,9 +42,12 @@
                     </tr>
                     <tr>
                         <td>Equity Remaining</td>
-                        <th scope="row"
+                        <!-- <th scope="row"
                             [ngClass]="{'text-success': currentProperty.purchaseInfo.equityRemaining > 0, 'text-danger':currentProperty.purchaseInfo.equityRemaining< 1 }">
+                            {{currentProperty.purchaseInfo.equityRemaining | currency}}</th> -->
+                            <th scope="row">
                             {{currentProperty.purchaseInfo.equityRemaining | currency}}</th>
+
                     </tr>
                 </tbody>
             </table>
@@ -105,7 +108,7 @@
                     </tr>
                     <tr>
                         <td>Loan Interest Rate</td>
-                        <th scope="row">{{currentProperty.purchaseInfo.refiLoanInterestRate}}%</th>
+                        <th scope="row">{{currentProperty.purchaseInfo.reportBeingDisplayed}}%</th>
                     </tr>
                     <tr>
                         <td>Monthly P&I</td>
@@ -121,86 +124,245 @@
         </div>
         <div class="col-7">
             <div class="row text-center">
-                <div class="btn-group btn-group-toggle" id="hightLevelViewButtons" data-toggle="buttons">
-                    <label class="btn btn-outline-primary active">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Rehab Period
+                <div class="btn-group btn-group-toggle" id="hightLevelViewButtons" data-toggle="buttons" (click)="reportOverviewBtnsClicked()">
+                    <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 1}">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="1">
+                        Rehab Period
                     </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="radio" name="options" id="option2" autocomplete="off"> Initial Rental Period
+                    <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 2}">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="2">
+                        Initial Rental Period
                     </label>
-                    <label class="btn btn-outline-primary">
-                        <input type="radio" name="options" id="option3" autocomplete="off"> Refinance
+                    <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 3}">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="3">
+                        Refinance
                     </label>
                 </div>
             </div>
 
-            <div class="row highlights-row">
-                <div class="col-3 highlights-col">
-                    <h3>
-                        {{currentProperty.rentalInfo.grossMonthlyRent | currency}}
-                    </h3>
-                    <h3>
-                        <small class="text-muted">Monthly Income</small>
-                    </h3>
+            <div id="rehabPeriodReport" *ngIf="reportBeingDisplayed == 1">
+                <div class="row highlights-row">
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Income</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyExpenses | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Expenses</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3
+                            [ngClass]="{'text-success': dataToDisplay.monthlyCashFlow > 0, 'text-danger':dataToDisplay.monthlyCashFlow < 1 }">
+                            {{dataToDisplay.monthlyCashFlow | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Cashflow</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            --.--%
+                        </h3>
+                        <h3>
+                            <small class="text-muted">PRO Forma Cap Rate</small>
+                        </h3>
+                    </div>
                 </div>
-                <div class="col-3 highlights-col">
-                    <h3>
-                        {{currentPropertyReport.refinancePeriod.expenses | currency}}
-                    </h3>
-                    <h3>
-                        <small class="text-muted">Monthly Expenses</small>
-                    </h3>
-                </div>
-                <div class="col-3 highlights-col">
-                    <h3
-                        [ngClass]="{'text-success': currentPropertyReport.refinancePeriod.montlyCashflow > 0, 'text-danger':currentPropertyReport.refinancePeriod.montlyCashflow < 1 }">
-                        {{currentPropertyReport.refinancePeriod.montlyCashflow | currency}}
-                    </h3>
-                    <h3>
-                        <small class="text-muted">Monthly Cashflow</small>
-                    </h3>
-                </div>
-                <div class="col-3 highlights-col">
-                    <h3>
-                        --.--%
-                    </h3>
-                    <h3>
-                        <small class="text-muted">PRO Forma Cap Rate</small>
-                    </h3>
+                <div class="row highlights-row">
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            $--.--
+                        </h3>
+                        <h3>
+                            <small class="text-muted">NOI</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.timeToRefinance}} Months
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Time to Refinance</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.roi}}%
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Cash on Cash ROI</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            --.--%
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Purchase Cap Rate</small>
+                        </h3>
+                    </div>
                 </div>
             </div>
-            <div class="row highlights-row">
-                <div class="col-3 highlights-col">
-                    <h3>
-                        $--.--
-                    </h3>
-                    <h3>
-                        <small class="text-muted">NOI</small>
-                    </h3>
+
+
+
+
+
+
+
+            <div id="initialRentalPeriodReport" *ngIf="reportBeingDisplayed == 2">
+                <div class="row highlights-row">
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Income</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Expenses</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3
+                            [ngClass]="{'text-success': currentPropertyReport.refinancePeriod.montlyCashflow > 0, 'text-danger':currentPropertyReport.refinancePeriod.montlyCashflow < 1 }">
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Cashflow</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            --.--%
+                        </h3>
+                        <h3>
+                            <small class="text-muted">PRO Forma Cap Rate</small>
+                        </h3>
+                    </div>
                 </div>
-                <div class="col-3 highlights-col">
-                    <h3>
-                        4 Months
-                    </h3>
-                    <h3>
-                        <small class="text-muted">Time to Refinance</small>
-                    </h3>
+                <div class="row highlights-row">
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            $--.--
+                        </h3>
+                        <h3>
+                            <small class="text-muted">NOI</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            4 Months
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Time to Refinance</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Cash on Cash ROI</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            --.--%
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Purchase Cap Rate</small>
+                        </h3>
+                    </div>
                 </div>
-                <div class="col-3 highlights-col">
-                    <h3>
-                        --.--%
-                    </h3>
-                    <h3>
-                        <small class="text-muted">Cash on Cash ROI</small>
-                    </h3>
+            </div>
+
+
+
+
+
+            <div id="refinancePeriodReport" *ngIf="reportBeingDisplayed == 3">
+                <div class="row highlights-row">
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Income</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Expenses</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3
+                            [ngClass]="{'text-success': currentPropertyReport.refinancePeriod.montlyCashflow > 0, 'text-danger':currentPropertyReport.refinancePeriod.montlyCashflow < 1 }">
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Monthly Cashflow</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            --.--%
+                        </h3>
+                        <h3>
+                            <small class="text-muted">PRO Forma Cap Rate</small>
+                        </h3>
+                    </div>
                 </div>
-                <div class="col-3 highlights-col">
-                    <h3>
-                        --.--%
-                    </h3>
-                    <h3>
-                        <small class="text-muted">Purchase Cap Rate</small>
-                    </h3>
+                <div class="row highlights-row">
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            $--.--
+                        </h3>
+                        <h3>
+                            <small class="text-muted">NOI</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            4 Months
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Time to Refinance</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            {{dataToDisplay.monthlyIncome | currency}}
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Cash on Cash ROI</small>
+                        </h3>
+                    </div>
+                    <div class="col-3 highlights-col">
+                        <h3>
+                            --.--%
+                        </h3>
+                        <h3>
+                            <small class="text-muted">Purchase Cap Rate</small>
+                        </h3>
+                    </div>
                 </div>
             </div>
         </div>

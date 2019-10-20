@@ -9,72 +9,26 @@ import { BrrrrService } from '../../../../../services/brrrr/brrrr.service';
 })
 export class BrrrrReportComponent implements OnInit {
   currentProperty: any = {};
-  currentPropertyReport: any = {
-    rehabPeriod: {
-      monthlyIncome: 0,
-      montlyExpenses: 0,
-      monthlyCashFlow: 0,
-      timeToRefinance: 0,
-      cashOnCashROI: 0
-    },
-    initialRentalPeriod: {
-      monthlyIncome: 0,
-      montlyExpenses: 0,
-      monthlyCashFlow: 0,
-      timeToRefinance: 0,
-      cashOnCashROI: 0
-    },
-    refinancePeriod: {
-      monthlyIncome: 0,
-      montlyExpenses: 0,
-      monthlyCashFlow: 0,
-      timeToRefinance: 0,
-      cashOnCashROI: 0,
-      principal: 0,
-      interest: 0,
-      payments: 0,
-      monthlyPayment: 0,
-      montlyCashflow:0
-    }
-  }
+  reportBeingDisplayed = 1;
+  dataToDisplay:any = {
+    monthlyIncome : 0,
+    monthlyExpenses : "",
+    monthlyCashFlow : "",
+    proFormaCapRate: "",
+    noi:"",
+    timeToRefinance:"",
+    cashOnCashROI:""
+  };
+
+
   constructor(private propertiesService: PropertiesService, private brrrrService: BrrrrService) {
     this.currentProperty = this.propertiesService.getcurrentPropertyInUse();
-    console.log("Current Property:", this.currentProperty);
-    this.computeAnalysis();
+    this.reportOverviewBtnsClicked();
   }
 
   ngOnInit() {
   }
-
-  computeAnalysis() {
-    var rentalInfo = this.currentProperty.rentalInfo;
-    var purchaseInfo = this.currentProperty.purchaseInfo;
-    var rentalInfoKeys = Object.keys(rentalInfo);
-    var expenses = 0;
-    var income = 0;
-
-    this.currentPropertyReport.refinancePeriod.principal = +purchaseInfo.loanAmount;
-    this.currentPropertyReport.refinancePeriod.interest = +purchaseInfo.loanInterestRate / 100 / 12;
-    this.currentPropertyReport.refinancePeriod.payments = +purchaseInfo.refiAomortizedDurationInYears * 12;
-    var x = Math.pow(1 + this.currentPropertyReport.refinancePeriod.interest, this.currentPropertyReport.refinancePeriod.payments);
-    this.currentPropertyReport.refinancePeriod.monthlyPayment = (this.currentPropertyReport.refinancePeriod.principal * x * this.currentPropertyReport.refinancePeriod.interest) / (x - 1);
-    // console.log("Monthly Payment:" + this.currentPropertyReport.refinancePeriod.monthlyPayment);
-    for (var i = 0; i < rentalInfoKeys.length; i++) {
-      if (rentalInfoKeys[i] != "grossMonthlyRent" && rentalInfoKeys[i] != "otherMontlyIncome") {
-        expenses = expenses + +rentalInfo[rentalInfoKeys[i]];
-      }
-      else{
-        income = income + + rentalInfo[rentalInfoKeys[i]];
-      }
-    }
-
-    expenses = expenses + this.currentPropertyReport.refinancePeriod.monthlyPayment;
-    this.currentPropertyReport.refinancePeriod.expenses = expenses;
-    this.currentPropertyReport.refinancePeriod.income = income;
-    this.currentPropertyReport.refinancePeriod.montlyCashflow = income - expenses;
-    // this.currentPropertyReport.refinancePeriod.roi = this.roi();
-  }
-
+ 
   roi(cost, gains) {
     cost = parseFloat(cost);
     gains = parseFloat(gains);
@@ -88,8 +42,15 @@ export class BrrrrReportComponent implements OnInit {
     return roiVal ;
   }
 
-
-  computePrivateMoneyLender(){
-
+  reportOverviewBtnsClicked(){
+    
+    this.dataToDisplay.monthlyIncome = 0;
+    this.dataToDisplay.monthlyExpenses = this.currentProperty.purchaseInfo.purchaseLoanMonthlyPayment;
+    this.dataToDisplay.monthlyCashFlow = this.dataToDisplay.monthlyIncome - this.dataToDisplay.monthlyExpenses;
+    this.dataToDisplay.timeToRefinance = this.currentProperty.purchaseInfo.monthsBeforeRefinance;
+    console.log("moneyBorrowed:" + this.currentProperty.purchaseInfo.totalMoneyBorrowed);
+    console.log("cashflow:" + this.dataToDisplay.monthlyCashFlow);
+    this.dataToDisplay.roi = this.roi(+this.currentProperty.purchaseInfo.totalMoneyBorrowed, (+this.dataToDisplay.monthlyCashFlow * 12));
+    this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);
   }
 }
