@@ -23,34 +23,40 @@ export class BrrrrReportComponent implements OnInit {
 
   constructor(private propertiesService: PropertiesService, private brrrrService: BrrrrService) {
     this.currentProperty = this.propertiesService.getcurrentPropertyInUse();
-    this.reportOverviewBtnsClicked();
+    this.reportOverviewBtnsClicked(3);
   }
 
   ngOnInit() {
   }
  
-  roi(cost, gains) {
-    cost = parseFloat(cost);
-    gains = parseFloat(gains);
-  
-    var top, bottom;
-    top = gains - cost;
-    bottom = top / cost;
-    var roiVal = bottom;
-  
-    roiVal = roiVal * 100;
-    return roiVal ;
+  roi(capital, gains) {    
+    return (100/capital)*gains ;
   }
 
-  reportOverviewBtnsClicked(){
+  reportOverviewBtnsClicked(validator){
     
-    this.dataToDisplay.monthlyIncome = 0;
-    this.dataToDisplay.monthlyExpenses = this.currentProperty.purchaseInfo.purchaseLoanMonthlyPayment;
-    this.dataToDisplay.monthlyCashFlow = this.dataToDisplay.monthlyIncome - this.dataToDisplay.monthlyExpenses;
-    this.dataToDisplay.timeToRefinance = this.currentProperty.purchaseInfo.monthsBeforeRefinance;
-    console.log("moneyBorrowed:" + this.currentProperty.purchaseInfo.totalMoneyBorrowed);
-    console.log("cashflow:" + this.dataToDisplay.monthlyCashFlow);
-    this.dataToDisplay.roi = this.roi(+this.currentProperty.purchaseInfo.totalMoneyBorrowed, (+this.dataToDisplay.monthlyCashFlow * 12));
-    this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);
+    if(validator == 1){
+      // console.log("a");
+      this.dataToDisplay.monthlyIncome = 0;
+      this.dataToDisplay.monthlyExpenses = this.currentProperty.purchaseInfo.purchaseLoanMonthlyPayment;
+      this.dataToDisplay.monthlyCashFlow = this.dataToDisplay.monthlyIncome - this.dataToDisplay.monthlyExpenses;
+      this.dataToDisplay.timeToRefinance = this.currentProperty.purchaseInfo.monthsBeforeRefinance;
+      console.log("moneyBorrowed:" + this.currentProperty.purchaseInfo.totalMoneyBorrowed);
+      console.log("cashflow:" + this.dataToDisplay.monthlyCashFlow);
+      this.dataToDisplay.roi = this.roi(+this.currentProperty.purchaseInfo.totalMoneyBorrowed, (+this.dataToDisplay.monthlyCashFlow * 12));
+      this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);
+    }
+    else if(validator == 2){
+      // console.log("b");
+    }
+    else{
+      this.dataToDisplay.monthlyIncome = this.currentProperty.rentalInfo.grossMonthlyRent;
+      this.dataToDisplay.monthlyExpenses = this.currentProperty.rentalInfo.montlyPropertyExpensesWithoutPnI + +this.currentProperty.purchaseInfo.refiMonthylyPayment;
+      this.dataToDisplay.monthlyCashFlow = +this.dataToDisplay.monthlyIncome - +this.dataToDisplay.monthlyExpenses;
+      this.dataToDisplay.timeToRefinance = 0;
+      this.dataToDisplay.roi = this.roi(+this.currentProperty.purchaseInfo.finalTotalMoneyInvested, (+this.dataToDisplay.monthlyCashFlow * 12));
+      this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);
+    }
+    this.reportBeingDisplayed = validator;
   }
 }

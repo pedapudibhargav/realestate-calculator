@@ -40,9 +40,7 @@ export class RentalInfoComponent implements OnInit {
 		var tmpProperty = this.propertiesService.getcurrentPropertyInUse();
 		if(tmpProperty && tmpProperty.rentalInfo){
 		  this.currentProperty = tmpProperty;
-		  console.log("a", tmpProperty.rentalInfo);
 		  if(tmpProperty.rentalInfo.grossMonthlyRent){
-			console.log("b");
 			this.fillInTheForm(tmpProperty.rentalInfo);
 		  }
 		}
@@ -51,6 +49,22 @@ export class RentalInfoComponent implements OnInit {
 
 	onClickSubmit(dataIn) {
 		console.log("Data from Rental Info:", JSON.stringify(dataIn));
+		var keys = Object.keys(dataIn);
+		var monthlyTotalIncome = 0;
+		var monthlyTotalExpenses = 0;
+		for(var i=0 ; i < keys.length; i++){
+			if(keys[i] == "grossMonthlyRent" || keys[i] == "otherMontlyIncome"){
+				monthlyTotalIncome += +dataIn[keys[i]];
+			}
+			else if(keys[i] == "annualIncomGrowthPercent" || keys[i] == "annualPropertyValueGrowthPercent" || keys[i] == "annualExpenseGrowth" || keys[i] == "salesExpensesPercentage"){
+
+			}
+			else{
+				monthlyTotalExpenses += +dataIn[keys[i]];
+			}
+		}
+		dataIn.montlyTotalIncome = monthlyTotalIncome;
+		dataIn.montlyPropertyExpensesWithoutPnI = monthlyTotalExpenses;
 		this.currentProperty.rentalInfo = dataIn;      
 		console.log("Purchase Info Comp: prop info updated in db:", this.propertiesService.updateCurrentPropertyInUse(this.currentProperty));
 		this.router.navigate(['/calculators/brrrr/report']);

@@ -124,17 +124,17 @@
         </div>
         <div class="col-7">
             <div class="row text-center">
-                <div class="btn-group btn-group-toggle" id="hightLevelViewButtons" data-toggle="buttons" (click)="reportOverviewBtnsClicked()">
+                <div class="btn-group btn-group-toggle" id="hightLevelViewButtons" data-toggle="buttons" >
                     <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 1}">
-                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="1">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="1" (click)="reportOverviewBtnsClicked(1)">
                         Rehab Period
                     </label>
                     <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 2}">
-                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="2">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="2" (click)="reportOverviewBtnsClicked(2)">
                         Initial Rental Period
                     </label>
-                    <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 3}">
-                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="3">
+                    <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 3}" >
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="3" (click)="reportOverviewBtnsClicked(3)">
                         Refinance
                     </label>
                 </div>
@@ -306,7 +306,7 @@
                     </div>
                     <div class="col-3 highlights-col">
                         <h3>
-                            {{dataToDisplay.monthlyIncome | currency}}
+                            {{dataToDisplay.monthlyExpenses | currency}}
                         </h3>
                         <h3>
                             <small class="text-muted">Monthly Expenses</small>
@@ -314,8 +314,8 @@
                     </div>
                     <div class="col-3 highlights-col">
                         <h3
-                            [ngClass]="{'text-success': currentPropertyReport.refinancePeriod.montlyCashflow > 0, 'text-danger':currentPropertyReport.refinancePeriod.montlyCashflow < 1 }">
-                            {{dataToDisplay.monthlyIncome | currency}}
+                            [ngClass]="{'text-success': dataToDisplay.monthlyCashFlow > 0, 'text-danger':dataToDisplay.monthlyCashFlow < 1 }">
+                            {{dataToDisplay.monthlyCashFlow | currency}}
                         </h3>
                         <h3>
                             <small class="text-muted">Monthly Cashflow</small>
@@ -341,7 +341,7 @@
                     </div>
                     <div class="col-3 highlights-col">
                         <h3>
-                            4 Months
+                            {{dataToDisplay.timeToRefinance}} Months
                         </h3>
                         <h3>
                             <small class="text-muted">Time to Refinance</small>
@@ -349,7 +349,7 @@
                     </div>
                     <div class="col-3 highlights-col">
                         <h3>
-                            {{dataToDisplay.monthlyIncome | currency}}
+                            {{dataToDisplay.roi}} %
                         </h3>
                         <h3>
                             <small class="text-muted">Cash on Cash ROI</small>

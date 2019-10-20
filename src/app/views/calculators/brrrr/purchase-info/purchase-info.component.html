@@ -31,8 +31,9 @@
                 <h4>
                     <small class="text-muted">Equity Left : </small>
                     <span *ngIf="+arv - (+prchasePrice + +purchaseClosingCost + +estimatedRepairCost) > -1" class="text-primary">{{+arv - (+prchasePrice + +purchaseClosingCost + +estimatedRepairCost)}}</span>
-                    <span *ngIf="+arv - (+prchasePrice + +purchaseClosingCost + +estimatedRepairCost) < 0" class="text-danger">{{+arv - (+prchasePrice + +purchaseClosingCost + +estimatedRepairCost)}}</span>
+                    <span *ngIf="+arv - (+prchasePrice + +purchaseClosingCost + +estimatedRepairCost) < 0" class="text-danger">{{+arv - (+prchasePrice + +purchaseClosingCost + +estimatedRepairCost)}}</span>                    
                 </h4>
+                <p>{{ ((100/+arv)*(+arv - (+prchasePrice + +purchaseClosingCost + +estimatedRepairCost))).toFixed(2) }} %</p>
             </div>
         </div>
     </div>
