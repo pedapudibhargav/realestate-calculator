@@ -20,7 +20,7 @@ export class BrrrrReportComponent implements OnInit {
     cashOnCashROI:""
   };
 
-
+  dataTableKeys = [];
   constructor(private propertiesService: PropertiesService, private brrrrService: BrrrrService) {
     this.currentProperty = this.propertiesService.getcurrentPropertyInUse();
     this.reportOverviewBtnsClicked(3);
@@ -47,7 +47,12 @@ export class BrrrrReportComponent implements OnInit {
       this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);
     }
     else if(validator == 2){
-      // console.log("b");
+      this.dataToDisplay.monthlyIncome = this.currentProperty.rentalInfo.grossMonthlyRent;
+      this.dataToDisplay.monthlyExpenses = this.currentProperty.rentalInfo.montlyPropertyExpensesWithoutPnI + +this.currentProperty.purchaseInfo.purchaseLoanMonthlyPayment;
+      this.dataToDisplay.monthlyCashFlow = +this.dataToDisplay.monthlyIncome - +this.dataToDisplay.monthlyExpenses;
+      this.dataToDisplay.timeToRefinance = 0;
+      this.dataToDisplay.roi = this.roi(+this.currentProperty.purchaseInfo.finalTotalMoneyInvested, (+this.dataToDisplay.monthlyCashFlow * 12));
+      this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);      
     }
     else{
       this.dataToDisplay.monthlyIncome = this.currentProperty.rentalInfo.grossMonthlyRent;
@@ -55,8 +60,10 @@ export class BrrrrReportComponent implements OnInit {
       this.dataToDisplay.monthlyCashFlow = +this.dataToDisplay.monthlyIncome - +this.dataToDisplay.monthlyExpenses;
       this.dataToDisplay.timeToRefinance = 0;
       this.dataToDisplay.roi = this.roi(+this.currentProperty.purchaseInfo.finalTotalMoneyInvested, (+this.dataToDisplay.monthlyCashFlow * 12));
-      this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);
+      this.dataToDisplay.roi = this.dataToDisplay.roi.toFixed(2);      
     }
+
+    this.dataTableKeys = Object.keys(this.currentProperty.rentalInfo.expenses);
     this.reportBeingDisplayed = validator;
   }
 }

@@ -45,7 +45,7 @@
                         <!-- <th scope="row"
                             [ngClass]="{'text-success': currentProperty.purchaseInfo.equityRemaining > 0, 'text-danger':currentProperty.purchaseInfo.equityRemaining< 1 }">
                             {{currentProperty.purchaseInfo.equityRemaining | currency}}</th> -->
-                            <th scope="row">
+                        <th scope="row">
                             {{currentProperty.purchaseInfo.equityRemaining | currency}}</th>
 
                     </tr>
@@ -124,17 +124,20 @@
         </div>
         <div class="col-7">
             <div class="row text-center">
-                <div class="btn-group btn-group-toggle" id="hightLevelViewButtons" data-toggle="buttons" >
+                <div class="btn-group btn-group-toggle" id="hightLevelViewButtons" data-toggle="buttons">
                     <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 1}">
-                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="1" (click)="reportOverviewBtnsClicked(1)">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="1"
+                            (click)="reportOverviewBtnsClicked(1)">
                         Rehab Period
                     </label>
                     <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 2}">
-                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="2" (click)="reportOverviewBtnsClicked(2)">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="2"
+                            (click)="reportOverviewBtnsClicked(2)">
                         Initial Rental Period
                     </label>
-                    <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 3}" >
-                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="3" (click)="reportOverviewBtnsClicked(3)">
+                    <label class="btn btn-outline-primary" [ngClass]="{'active': reportBeingDisplayed == 3}">
+                        <input type="radio" name="reportBeingDisplayed" [(ngModel)]="reportBeingDisplayed" value="3"
+                            (click)="reportOverviewBtnsClicked(3)">
                         Refinance
                     </label>
                 </div>
@@ -218,77 +221,99 @@
 
 
 
-            <div id="initialRentalPeriodReport" *ngIf="reportBeingDisplayed == 2">
-                <div class="row highlights-row">
-                    <div class="col-3 highlights-col">
-                        <h3>
-                            {{dataToDisplay.monthlyIncome | currency}}
-                        </h3>
-                        <h3>
-                            <small class="text-muted">Monthly Income</small>
-                        </h3>
+            <div id="refinancePeriodReport" *ngIf="reportBeingDisplayed == 2">
+                    <div class="row highlights-row">
+                        <div class="col-3 highlights-col">
+                            <h3>
+                                {{dataToDisplay.monthlyIncome | currency}}
+                            </h3>
+                            <h3>
+                                <small class="text-muted">Monthly Income</small>
+                            </h3>
+                        </div>
+                        <div class="col-3 highlights-col">
+                            <h3>
+                                {{dataToDisplay.monthlyExpenses | currency}}
+                            </h3>
+                            <h3>
+                                <small class="text-muted">Monthly Expenses</small>
+                            </h3>
+                        </div>
+                        <div class="col-3 highlights-col">
+                            <h3
+                                [ngClass]="{'text-success': dataToDisplay.monthlyCashFlow > 0, 'text-danger':dataToDisplay.monthlyCashFlow < 1 }">
+                                {{dataToDisplay.monthlyCashFlow | currency}}
+                            </h3>
+                            <h3>
+                                <small class="text-muted">Monthly Cashflow</small>
+                            </h3>
+                        </div>
+                        <div class="col-3 highlights-col">
+                            <h3>
+                                --.--%
+                            </h3>
+                            <h3>
+                                <small class="text-muted">PRO Forma Cap Rate</small>
+                            </h3>
+                        </div>
                     </div>
-                    <div class="col-3 highlights-col">
-                        <h3>
-                            {{dataToDisplay.monthlyIncome | currency}}
-                        </h3>
-                        <h3>
-                            <small class="text-muted">Monthly Expenses</small>
-                        </h3>
+                    <div class="row highlights-row">
+                        <div class="col-3 highlights-col">
+                            <h3>
+                                $--.--
+                            </h3>
+                            <h3>
+                                <small class="text-muted">NOI</small>
+                            </h3>
+                        </div>
+                        <div class="col-3 highlights-col">
+                            <h3>
+                                {{dataToDisplay.timeToRefinance}} Months
+                            </h3>
+                            <h3>
+                                <small class="text-muted">Time to Refinance</small>
+                            </h3>
+                        </div>
+                        <div class="col-3 highlights-col">
+                            <h3>
+                                {{dataToDisplay.roi}} %
+                            </h3>
+                            <h3>
+                                <small class="text-muted">Cash on Cash ROI</small>
+                            </h3>
+                        </div>
+                        <div class="col-3 highlights-col">
+                            <h3>
+                                --.--%
+                            </h3>
+                            <h3>
+                                <small class="text-muted">Purchase Cap Rate</small>
+                            </h3>
+                        </div>
                     </div>
-                    <div class="col-3 highlights-col">
-                        <h3
-                            [ngClass]="{'text-success': currentPropertyReport.refinancePeriod.montlyCashflow > 0, 'text-danger':currentPropertyReport.refinancePeriod.montlyCashflow < 1 }">
-                            {{dataToDisplay.monthlyIncome | currency}}
-                        </h3>
-                        <h3>
-                            <small class="text-muted">Monthly Cashflow</small>
-                        </h3>
-                    </div>
-                    <div class="col-3 highlights-col">
-                        <h3>
-                            --.--%
-                        </h3>
-                        <h3>
-                            <small class="text-muted">PRO Forma Cap Rate</small>
-                        </h3>
+    
+                    <br>
+                    <div class="row">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Expense</th>
+                                    <th scope="col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let expenseKey of dataTableKeys">
+                                    <th scope="row">{{expenseKey}}</th>
+                                    <td>{{currentProperty.rentalInfo.expenses[expenseKey]}}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Mortgage P&I</th>
+                                    <td>{{currentProperty.purchaseInfo.purchaseLoanMonthlyPayment}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="row highlights-row">
-                    <div class="col-3 highlights-col">
-                        <h3>
-                            $--.--
-                        </h3>
-                        <h3>
-                            <small class="text-muted">NOI</small>
-                        </h3>
-                    </div>
-                    <div class="col-3 highlights-col">
-                        <h3>
-                            4 Months
-                        </h3>
-                        <h3>
-                            <small class="text-muted">Time to Refinance</small>
-                        </h3>
-                    </div>
-                    <div class="col-3 highlights-col">
-                        <h3>
-                            {{dataToDisplay.monthlyIncome | currency}}
-                        </h3>
-                        <h3>
-                            <small class="text-muted">Cash on Cash ROI</small>
-                        </h3>
-                    </div>
-                    <div class="col-3 highlights-col">
-                        <h3>
-                            --.--%
-                        </h3>
-                        <h3>
-                            <small class="text-muted">Purchase Cap Rate</small>
-                        </h3>
-                    </div>
-                </div>
-            </div>
 
 
 
@@ -363,6 +388,28 @@
                             <small class="text-muted">Purchase Cap Rate</small>
                         </h3>
                     </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Expense</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let expenseKey of dataTableKeys">
+                                <th scope="row">{{expenseKey}}</th>
+                                <td>{{currentProperty.rentalInfo.expenses[expenseKey]}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mortgage P&I</th>
+                                <td>{{currentProperty.purchaseInfo.refiMonthylyPayment}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

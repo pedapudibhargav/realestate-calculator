@@ -52,14 +52,20 @@ export class RentalInfoComponent implements OnInit {
 		var keys = Object.keys(dataIn);
 		var monthlyTotalIncome = 0;
 		var monthlyTotalExpenses = 0;
+		dataIn["expenses"] = {};
 		for(var i=0 ; i < keys.length; i++){
 			if(keys[i] == "grossMonthlyRent" || keys[i] == "otherMontlyIncome"){
 				monthlyTotalIncome += +dataIn[keys[i]];
 			}
+			else if(keys[i] == "vacancy" || keys[i] == "repairsAndMaintenance" || keys[i] == "capitalExpenditure" || keys[i] == "managementFees"){
+				monthlyTotalExpenses += (monthlyTotalIncome/100) * +dataIn[keys[i]];
+				dataIn.expenses[keys[i]] = (monthlyTotalIncome/100) * +dataIn[keys[i]];
+			}			
 			else if(keys[i] == "annualIncomGrowthPercent" || keys[i] == "annualPropertyValueGrowthPercent" || keys[i] == "annualExpenseGrowth" || keys[i] == "salesExpensesPercentage"){
 
 			}
 			else{
+				dataIn["expenses"][keys[i]] = +dataIn[keys[i]];
 				monthlyTotalExpenses += +dataIn[keys[i]];
 			}
 		}
