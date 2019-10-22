@@ -45,10 +45,28 @@ export class PropertiesService {
     if (window.localStorage) {
       if (localStorage.currentPropertyInUse) {
         localStorage.currentPropertyInUse = JSON.stringify(updatedProperty);
+        var propertyKey = updatedProperty.propertyInfo.propertyId;
+        var allProps = this.getAllProperties();
+        allProps[propertyKey] = updatedProperty;
         return JSON.parse(localStorage.currentPropertyInUse);
       }
     }
     else {
+      alert("Local storage is not supported by the browser. Please update your browser");
+    }
+  }
+
+
+  getAllProperties(){
+    if (window.localStorage) {
+      if (localStorage.allProperties) {
+        return JSON.parse(localStorage.allProperties);
+      }else{
+        return  localStorage.allProperties;
+      }
+    }
+    else {
+
       alert("Local storage is not supported by the browser. Please update your browser");
     }
   }

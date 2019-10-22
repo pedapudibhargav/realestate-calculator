@@ -50,7 +50,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'BRRRR',
-    url: '/calculators/brrrr',
+    url: '/calculators/projects',
     icon: 'icon-pencil'
   },
   {

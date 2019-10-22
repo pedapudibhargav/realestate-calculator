@@ -9,6 +9,7 @@ import { RentalInfoComponent } from './brrrr/rental-info/rental-info.component';
 import { FormsModule, NgModel } from '@angular/forms';
 import { ExteriorExpensesComponent } from './rehab-cost/exterior-expenses/exterior-expenses.component';
 import { BrrrrReportComponent } from './brrrr/report/brrrr-report/brrrr-report.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 
 
@@ -28,6 +29,13 @@ const routes: Routes = [
         component: RehabCostComponent,
         data: {
           title: 'Rehab Cost Calculator'
+        }
+      },
+      {
+        path: 'projects',
+        component: ProjectsComponent,
+        data: {
+          title: 'Projects'
         }
       },
       {
@@ -74,6 +82,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes), FormsModule,CommonModule],
   exports: [RouterModule],
-  declarations: [RehabCostComponent, BrrrrComponent, PropertyInfoComponent, PurchaseInfoComponent, RentalInfoComponent, ExteriorExpensesComponent, BrrrrReportComponent]
+  declarations: [RehabCostComponent, BrrrrComponent, PropertyInfoComponent, PurchaseInfoComponent, RentalInfoComponent, ExteriorExpensesComponent, BrrrrReportComponent, ProjectsComponent]
 })
 export class CalculatorsModule { }
