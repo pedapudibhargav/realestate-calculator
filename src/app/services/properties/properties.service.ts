@@ -48,6 +48,7 @@ export class PropertiesService {
         var propertyKey = updatedProperty.propertyInfo.propertyId;
         var allProps = this.getAllProperties();
         allProps[propertyKey] = updatedProperty;
+        this.updateAllProperties(allProps);
         return JSON.parse(localStorage.currentPropertyInUse);
       }
     }
@@ -56,13 +57,15 @@ export class PropertiesService {
     }
   }
 
-
+  updateAllProperties(allProperties){
+    return localStorage.allProperties = JSON.stringify(allProperties);
+  }
   getAllProperties(){
     if (window.localStorage) {
       if (localStorage.allProperties) {
         return JSON.parse(localStorage.allProperties);
       }else{
-        return  localStorage.allProperties;
+        alert("There are no properties");
       }
     }
     else {

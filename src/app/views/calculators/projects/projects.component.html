@@ -4,7 +4,7 @@
     </div>
     <div class="row">
         <div *ngFor="let projKeyIn of allProjectKeys" class="card" style="width: 18rem;">
-            <img class="card-img-top" src="https://photos.zillowstatic.com/fp/812a6cd784d37df5dc0fc4c20763e778-cc_ft_1536.webp" alt="Card image cap">
+            <img class="card-img-top" src="{{allProjects[projKeyIn].propertyInfo.propertyImageUrl}}" alt="Card image cap">
             <div class="card-body">
                 <p class="card-text">{{allProjects[projKeyIn].propertyInfo.propertyId}}</p>
                 <h5 class="card-title">{{allProjects[projKeyIn].propertyInfo.propertyTitle}}</h5>

@@ -11,7 +11,7 @@ export class BrrrrService {
 
   updatePropertyDetails(propertyInfoIn : any){
     var currentProperty : any = {};
-    // console.log("BRRR - s - Property Info Received", propertyInfoIn);
+    console.log("BRRR - s - Property Info Received", propertyInfoIn);
     if(!propertyInfoIn.propertyId || propertyInfoIn.propertyId == ""){
       currentProperty = this.propertyService.createNewProperty();
     }
@@ -20,7 +20,7 @@ export class BrrrrService {
     }
     currentProperty.propertyInfo = propertyInfoIn
     // console.log("BRRR - s - before storing", currentProperty);
-    // console.log("BRRR - s - after storing",this.propertyService.updateCurrentPropertyInUse(currentProperty));
+    console.log("BRRR - s - after storing",this.propertyService.updateCurrentPropertyInUse(currentProperty));
   }
 
 

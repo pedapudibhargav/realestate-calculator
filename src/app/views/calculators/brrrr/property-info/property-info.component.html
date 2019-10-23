@@ -3,7 +3,8 @@
     <div class="col-sm-6">
         <div class="form-group d-none">
             <label for="propertyId">Property Id</label>
-            <input type="text" [(ngModel)]="propertyId" value="" class="form-control" name="propertyId" placeholder="ID" >
+            <input type="text" [(ngModel)]="propertyId" value="" class="form-control" name="propertyId"
+                placeholder="ID">
         </div>
         <p>Property ID: {{propertyId}}</p>
         <div class="form-group">
@@ -41,6 +42,24 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="propertyCity">Property Image URL</label>
+                    <input type="text" [(ngModel)]="propertyImageUrl" value="" class="form-control"
+                        name="propertyImageUrl" placeholder="XXXXX">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="propertyCity">MLS Url</label>
+                    <input type="text" [(ngModel)]="mlsUrl" value="" class="form-control"
+                        name="mlsUrl" placeholder="XXXXX">
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="exampleFormControlTextarea1">Property Sales Description</label>
             <textarea class="form-control" name="propertySalesDescription" [(ngModel)]="propertySalesDescription"

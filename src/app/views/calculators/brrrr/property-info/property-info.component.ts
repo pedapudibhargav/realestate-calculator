@@ -17,6 +17,7 @@ export class PropertyInfoComponent implements OnInit {
   propertyZip:string = "";
   propertySalesDescription:string = "";
   propertyImageUrl:string = "";
+  mlsUrl:string = "";
 
   isNewProperty:boolean = true;
 
@@ -54,5 +55,6 @@ export class PropertyInfoComponent implements OnInit {
     this.propertyZip = dataIn.propertyZip;
     this.propertySalesDescription = dataIn.propertySalesDescription;
     this.propertyImageUrl = dataIn.propertyImageUrl;
+    this.mlsUrl = dataIn.mlsUrl;
   }
 }
